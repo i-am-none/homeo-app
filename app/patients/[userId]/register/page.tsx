@@ -3,13 +3,16 @@ import { redirect } from "next/navigation";
 import Link from "next/link"
 import RegisterForm from "@/components/forms/RegisterForm"
 import { getUser } from "@/lib/actions/patient.actions";
-import { getPatient } from "@/lib/actions/patient.actions";
+import { createUser } from "@/lib/actions/patient.actions";
+// import { getPatient } from "@/lib/actions/patient.actions";
 
-const Register = async ({params: {userId}}: SearchParamProps) => {
+const Register = async ({params: { userId } } : {params: { userId: string }}) => {
+  console.log("Fetched userId:", userId);
   const user = await getUser(userId);
-  const patient = await getPatient(userId);
+  console.log(user);
+  // const patient = await getPatient(userId);
 
-  if (patient) redirect(`/patients/${userId}/new-appointment`);
+  // if (patient) redirect(`/patients/${userId}/new-appointment`);
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -19,10 +22,12 @@ const Register = async ({params: {userId}}: SearchParamProps) => {
               src = "/assets/icons/logo-full.svg"
               height = {1000}
               width={1000}
-              alt="patient"
+              alt="Homeo"
               className="mb-12 h-10 w-fit"
           />
-          <RegisterForm user={user} />
+          
+          <RegisterForm user = { user }/>
+
             <p className="copyright py-12">
             © 2024 Homeo
             </p>

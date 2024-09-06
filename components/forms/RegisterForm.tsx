@@ -22,29 +22,30 @@ import Image from "next/image";
 import { SelectItem } from "../ui/select";
 import { IdentificationTypes } from "@/constants";
 import FileUploader from "../ui/FileUploader";
+// import formData from "form-data";
 
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
+  console.log('checktwo', user)
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     resolver: zodResolver(PatientFormValidation),
     defaultValues: {
       ...PatientFormDefaultValues,
-      name: user?.name,
-      email: user?.email,
-      phone: user?.phone,
-    }
+      name: "",
+      email: "",
+      phone: "",
+    },
   });
 
 
-  const onSubmit = async (values: z.infer<typeof
-    PatientFormValidation>) => {
+  async function onSubmit (values: z.infer<typeof
+    PatientFormValidation>) {
     setIsLoading(true);
-
     let formData;
-
+      console.log(values)
     if (
       values.identificationDocument &&
       values.identificationDocument?.length > 0
@@ -59,13 +60,12 @@ const RegisterForm = ({ user }: { user: User }) => {
     }
 
     try {
-      const patientData = {
-        ...values,
-        userId: user.$id,
+      const patient = {
         name: values.name,
         email: values.email,
+        userId: user.$id,
         phone: values.phone,
-        birthDate: new Date(values.birthDate),
+        birthDate: new Date(values.birthDate),  
         gender: values.gender,
         address: values.address,
         occupation: values.occupation,
@@ -81,17 +81,19 @@ const RegisterForm = ({ user }: { user: User }) => {
         identificationType: values.identificationType,
         identificationNumber: values.identificationNumber,
         identificationDocument: values.identificationDocument
-          ? formData
-          : undefined,
-        privacyConsent: values.privacyConsent,
+        ? formData
+        : undefined,
+      privacyConsent: values.privacyConsent,
+
       };
 
       // @ts-ignore 
       const newPatient = await registerPatient(patient);
+      console.log('checkone', newPatient)
 
-      if (newPatient) {
-        router.push(`/patients/${user.$id}/new-appointment`);
-      }
+      if (newPatient) 
+        router.push(`/patients/${newPatient.$id}/new-appointment`);
+      
     } catch (error) {
       console.log(error);
     }
@@ -218,8 +220,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
-              name="EmergencyContactNumber"
-              label="Emergency conrtact number"
+              name="emergencyContactNumber"
+              label="Emergency contact number"
               placeholder="909873344"
             />
           </div>
@@ -237,8 +239,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             label="Primary Physician"
             placeholder="Select a physician"
           >
-            {Doctors.map((doctor, i) => (
-              <SelectItem key={doctor.name + i} value={doctor.name}>
+            {Doctors.map((doctor) => (
+              <SelectItem key={doctor.name} value={doctor.name}>
                 <div className="flex cursor-pointer items-center gap-2">
                   <Image
                     src={doctor.image}
@@ -324,8 +326,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             label="Identification type"
             placeholder="Select an identification type"
           >
-            {IdentificationTypes.map((type, i) => (
-              <SelectItem key={type + i} value={type}>
+            {IdentificationTypes.map((type) => (
+              <SelectItem key={type} value={type}>
                 {type}
               </SelectItem>
             ))}
