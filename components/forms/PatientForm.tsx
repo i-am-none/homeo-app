@@ -7,8 +7,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import CustomFormField from "@/components/ui/CustomFormField";
-import SubmitButton from "@/components/ui/SubmitButton";
+import CustomFormField from "@/components/CustomFormField";
+import SubmitButton from "@/components/SubmitButton";
 import { useState } from 'react';
 import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation";

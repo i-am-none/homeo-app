@@ -6,8 +6,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import CustomFormField from "@/components/ui/CustomFormField";
-import SubmitButton from "@/components/ui/SubmitButton";
+import CustomFormField from "@/components/CustomFormField";
+import SubmitButton from "@/components/SubmitButton";
 import { useState } from 'react';
 import { PatientFormValidation, UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ import { Doctors } from "@/constants";
 import Image from "next/image";
 import { SelectItem } from "../ui/select";
 import { IdentificationTypes } from "@/constants";
-import FileUploader from "../ui/FileUploader";
+import FileUploader from "../FileUploader";
 // import formData from "form-data";
 
 

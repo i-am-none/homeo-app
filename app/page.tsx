@@ -1,7 +1,7 @@
 import Image from "next/image";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
-import PassKeyModal from "@/components/ui/PassKeyModal";
+import PassKeyModal from "@/components/PassKeyModal";
 // import { PasskeyModal } from "@/components/PasskeyModal";
 
 export default function Home({ searchParams }: SearchParamProps) {
