@@ -48,16 +48,14 @@ export const getUser = async (userId: string) => {
     }
 };
 
-export const getPatient = async (userId: string) => {
+export const getPatient = async (patientId: string) => {
     try {
-        const patients = await databases.listDocuments(
+        const patients = await databases.getDocument(
             DATABASE_ID!,
             PATIENT_COLLECTION_ID!,
-            [
-                Query.equal('userId', userId)
-            ]
-        )
-        return parseStringify(patients.documents[0]);
+            patientId
+        );
+        return parseStringify(patients);
     } catch (error) {
         console.error(
             "An error occurred while retrieving the user details:",

@@ -35,6 +35,7 @@ const AppointmentForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const AppointmentFormValidation = getAppointmentSchema(type);
+  console.log(AppointmentForm)
   // 1. Define your form.
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
@@ -64,11 +65,9 @@ const AppointmentForm = ({
         break;
     }
 
-    console.log('before the type', type);
-    console.log('Type value:', type);
-    console.log('Form values:', values);
-
     try {
+      console.log('type', type);
+      console.log('patinet Id' , patientId);
       if (type === 'create' && patientId) {
         console.log('IM HERE');
 
@@ -89,8 +88,11 @@ const AppointmentForm = ({
 
         if (newAppointment) {
           form.reset();
-          router.push(`/patients/${userId}/new-appointment/success?appointmentId=
-            ${newAppointment.$id}`);
+          
+          // localStorage.setItem('PatientId', patientId);
+          router.push(`/patients/${userId}/${patientId}/new-appointment/success?appointmentId=${newAppointment.$id}&type=${type}/page.tsx`);
+
+            // const pId = localStorage.getItem('PatientId');
         }
       }   
         

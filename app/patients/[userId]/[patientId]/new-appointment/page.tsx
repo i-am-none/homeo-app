@@ -6,8 +6,20 @@ import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.actions";
 
 
-export default async function NewAppointment({ params: { userId, patientId}}: SearchParamProps) {
-  const patient = await getPatient(userId);
+
+// export default async function NewAppointment({ params: { userId, patientId, type}}; searchParams: { type: string };) {
+  export default async function NewAppointment({
+    params,
+    searchParams,
+  }: {
+    params: { userId: string; patientId: string };
+    searchParams: { type: string };
+  }){  
+    const { userId, patientId } = params;
+  const { type } = searchParams; // This will grab the type from the query string
+
+  const patient = await getPatient(patientId);
+  console.log('patient', patient);
   return (
    <div className="flex h-screen max-h-screen">
        
@@ -23,7 +35,7 @@ export default async function NewAppointment({ params: { userId, patientId}}: Se
           <AppointmentForm 
           type="create"
           userId={userId}
-          patientId={patient?.id}
+          patientId={patient?.$id}
           />
 
             <p className="copyright mt-10 py-12">

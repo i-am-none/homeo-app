@@ -92,7 +92,8 @@ const RegisterForm = ({ user }: { user: User }) => {
       console.log('checkone', newPatient)
 
       if (newPatient) 
-        router.push(`/patients/${newPatient.$id}/new-appointment`);
+        // router.push(`/patients/${newPatient.$id}/new-appointment`);
+      router.push(`/patients/${user.$id}/${newPatient.$id}/new-appointment?type=create`);
       
     } catch (error) {
       console.log(error);
