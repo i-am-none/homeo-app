@@ -14,7 +14,7 @@ import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
 import "react-phone-number-input/style.css";
-// import { FormFieldType }  from "./ui/CustomFormField";
+//  import { FormFieldType }=  from "@/components/CustomFormField";
 
 export enum FormFieldType {
     INPUT = "input",

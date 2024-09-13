@@ -16,18 +16,18 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormFieldType } from '../forms/PatientForm';
+import { FormFieldType } from './forms/PatientForm';
 
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { E164Number } from 'libphonenumber-js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Select } from './select';
-import { SelectValue } from './select';
-import { SelectContent, SelectTrigger } from './select';
-import { Textarea } from './textarea';
-import { Checkbox } from './checkbox';
+import { Select } from './ui/select';
+import { SelectValue } from './ui/select';
+import { SelectContent, SelectTrigger } from './ui/select';
+import { Textarea } from './ui/textarea';
+import { Checkbox } from './ui/checkbox';
 
 
 
